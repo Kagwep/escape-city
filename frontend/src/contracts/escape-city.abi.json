@@ -1,0 +1,153 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.80.0-nightly",
+            "commitHash": "1a7397988684934ae01a71f524bdfff24895d8cc",
+            "commitDate": "2024-05-17",
+            "channel": "Nightly",
+            "short": "rustc 1.80.0-nightly (1a7397988 2024-05-17)"
+        },
+        "contractCrate": {
+            "name": "escape-city",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "multiversx-sc",
+            "version": "0.50.3"
+        }
+    },
+    "docs": [
+        "An empty contract. To be used as a template when starting a new contract from scratch."
+    ],
+    "name": "EscapeCity",
+    "constructor": {
+        "inputs": [],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "calculate_points",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "distance",
+                    "type": "u64"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "create_escape_attempt_feed_runaway",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "distance_covered",
+                    "type": "u64"
+                },
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "generate_trail_print",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "create_new_runaway",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "name",
+                    "type": "bytes"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "calculate_shed_weight",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "parent_weight",
+                    "type": "u64"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "multiply",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                },
+                {
+                    "name": "target_dna",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        }
+    ],
+    "events": [
+        {
+            "identifier": "newEscapeEvent",
+            "inputs": [
+                {
+                    "name": "escape_id",
+                    "type": "u32",
+                    "indexed": true
+                },
+                {
+                    "name": "user",
+                    "type": "Address"
+                },
+                {
+                    "name": "points",
+                    "type": "u64",
+                    "indexed": true
+                }
+            ]
+        },
+        {
+            "identifier": "newRunawayEvent",
+            "inputs": [
+                {
+                    "name": "zombie_id",
+                    "type": "u32",
+                    "indexed": true
+                },
+                {
+                    "name": "name",
+                    "type": "bytes"
+                },
+                {
+                    "name": "dna",
+                    "type": "u64",
+                    "indexed": true
+                }
+            ]
+        }
+    ],
+    "esdtAttributes": [],
+    "hasCallback": false,
+    "types": {}
+}
