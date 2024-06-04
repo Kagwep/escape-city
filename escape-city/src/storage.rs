@@ -28,4 +28,13 @@ pub trait StorageModule {
     #[storage_mapper("runawayOwner")]
     fn runaway_owner(&self, id: usize) -> SingleValueMapper<ManagedAddress>;
 
+    #[storage_mapper("totalRunAways")]
+    fn total_runaways(&self) -> SingleValueMapper<usize>;
+
+    #[storage_mapper("nrOwnedRunAways")]
+    fn nr_owned_runaways(&self, address: &ManagedAddress) -> SingleValueMapper<usize>;
+
+    #[storage_mapper("approvedAddress")]
+    fn approved_address(&self, runaway_id: usize) -> SingleValueMapper<ManagedAddress>;
+
 }

@@ -267,6 +267,8 @@ export const EscapeCity = () => {
   
       return enemy!;
   };
+
+  const hitSound = new Sound("hitSound", "/sounds/impact.mp3", scene);
   
   const createProjectile = (scene: Scene): Mesh => {
       const sphere = MeshBuilder.CreateSphere("projectile", { diameter: 0.2 }, scene);
@@ -292,6 +294,9 @@ export const EscapeCity = () => {
           if (Vector3.Distance(projectile.position, target.position) < 0.5) {
               // Reduce player's life
               life -= 0.05; // Adjust as needed
+             
+                hitSound.play();
+    
               gameUI.updateLifeBar(life);
               if (life <= 0  ){
                 characterController.setDead();
@@ -300,7 +305,10 @@ export const EscapeCity = () => {
               projectiles = projectiles.filter(p => p !== projectile);
               projectile.dispose();
               clearInterval(interval);
-          }
+          }else{}
+        
+            hitSound.stop();
+        
       }, 16); // Update projectile position every 16ms (~60 FPS)
   
       // Dispose of the projectile after 2 seconds
@@ -354,6 +362,7 @@ export const EscapeCity = () => {
           // Check if the distance between the player and the enemy is less than the threshold
           if (Vector3.Distance(characterController.player.position, enemy.position) < threshold) {
               life -= 0.001; // Decrease life only when the player is attacked
+
               if (life <= 0  ){
                 characterController.setDead();
               }
@@ -417,7 +426,12 @@ export const EscapeCity = () => {
   }
   
   // Call addEnemy when necessary to manually add enemies during the game
-  
+      // Create and play the background music
+    //   const backgroundMusic = new Sound("backgroundMusic", "sounds/nightmare.mp3", scene, null, {
+    //     loop: true, // Loop the sound
+    //     autoplay: true, // Play the sound immediately
+    //     volume: 0.5 // Adjust the volume
+    // });
     
       // Assuming 'scene' is your Babylon.js scene object
       engine.runRenderLoop(() => {
