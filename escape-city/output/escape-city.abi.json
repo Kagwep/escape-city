@@ -92,19 +92,164 @@
             ]
         },
         {
+            "name": "getRunAwayById",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "RunAway"
+                }
+            ]
+        },
+        {
             "name": "multiply",
             "mutability": "mutable",
+            "payableInTokens": [
+                "EGLD"
+            ],
             "inputs": [
                 {
                     "name": "runaway_id",
                     "type": "u32"
                 },
                 {
-                    "name": "target_dna",
-                    "type": "u64"
+                    "name": "target_runaway_id",
+                    "type": "u32"
                 }
             ],
             "outputs": []
+        },
+        {
+            "name": "isReadyToMultiply",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "claim",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "totalSupply",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u32"
+                }
+            ]
+        },
+        {
+            "name": "approve",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "to",
+                    "type": "Address"
+                },
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "balanceOf",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u32"
+                }
+            ]
+        },
+        {
+            "name": "ownerOf",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "transfer",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "to",
+                    "type": "Address"
+                },
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "transfer_from",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "from",
+                    "type": "Address"
+                },
+                {
+                    "name": "to",
+                    "type": "Address"
+                },
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "tokensOfOwner",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "variadic<u32>",
+                    "multi_result": true
+                }
+            ]
         }
     ],
     "events": [
@@ -145,9 +290,71 @@
                     "indexed": true
                 }
             ]
+        },
+        {
+            "identifier": "transfer",
+            "inputs": [
+                {
+                    "name": "from",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "to",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "token_id",
+                    "type": "u32",
+                    "indexed": true
+                }
+            ]
+        },
+        {
+            "identifier": "approve",
+            "inputs": [
+                {
+                    "name": "owner",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "approved",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "token_id",
+                    "type": "u32",
+                    "indexed": true
+                }
+            ]
         }
     ],
     "esdtAttributes": [],
     "hasCallback": false,
-    "types": {}
+    "types": {
+        "RunAway": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "trail_print",
+                    "type": "u64"
+                },
+                {
+                    "name": "weight",
+                    "type": "u64"
+                },
+                {
+                    "name": "experience",
+                    "type": "u64"
+                },
+                {
+                    "name": "name",
+                    "type": "bytes"
+                }
+            ]
+        }
+    }
 }

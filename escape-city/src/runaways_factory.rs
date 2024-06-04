@@ -53,7 +53,7 @@ pub trait RunAwayFactory: storage::StorageModule {
     }
 
     fn is_valid_id(&self, runaway_id: usize) -> bool {
-        runaway_id != 0 && runaway_id < self.total_runaways().get()
+        runaway_id != 0 && runaway_id <= self.total_runaways().get()
     }
 
     fn perform_transfer(&self, from: &ManagedAddress, to: &ManagedAddress, runaway_id: usize) {

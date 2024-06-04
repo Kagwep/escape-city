@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                            6
+// Endpoints:                           16
 // Async Callback (empty):               1
-// Total number of exported functions:   8
+// Total number of exported functions:  18
 
 #![no_std]
 
@@ -23,7 +23,17 @@ multiversx_sc_wasm_adapter::endpoints! {
         generate_trail_print => generate_trail_print
         create_new_runaway => create_new_runaway
         calculate_shed_weight => calculate_shed_weight
+        getRunAwayById => get_runaway_by_id_endpoint
         multiply => multiply
+        isReadyToMultiply => is_ready_to_multiply
+        claim => claim
+        totalSupply => total_supply
+        approve => approve
+        balanceOf => balance_of
+        ownerOf => owner_of
+        transfer => transfer
+        transfer_from => transfer_from
+        tokensOfOwner => tokens_of_owner
     )
 }
 

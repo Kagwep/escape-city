@@ -65,6 +65,8 @@ pub trait RunAwayOwnership: storage::StorageModule + runaways_factory::RunAwayFa
             "You are not the owner of that runaway!"
         );
 
+        require!(self.is_valid_transfer(runaway_id),"Runaway doesnt have enough weight");
+
         self.perform_transfer(&caller, &to, runaway_id);
     }
 
@@ -87,6 +89,8 @@ pub trait RunAwayOwnership: storage::StorageModule + runaways_factory::RunAwayFa
                 || self.get_approved_address_or_default(runaway_id) == caller,
             "You are not the owner of that Runaway nor the approved address!"
         );
+
+        require!(self.is_valid_transfer(runaway_id),"Runaway doesnt have enough weight");
 
         self.perform_transfer(&from, &to, runaway_id);
     }
@@ -120,6 +124,16 @@ pub trait RunAwayOwnership: storage::StorageModule + runaways_factory::RunAwayFa
 
         runaway_list.into()
     }
+
+    fn is_valid_transfer(&self, runaway_id: usize) -> bool {
+        if runaway_id > 0 && runaway_id <= self.total_runaways().get() {
+            let runaway = self.runaways(runaway_id).get();
+            runaway.weight > 200
+        } else {
+            false
+        }
+    }
+    
 
     #[event("approve")]
     fn approve_event(
