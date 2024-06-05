@@ -9,19 +9,17 @@ export const Home = () => {
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
             <div className='flex flex-col gap-2 max-w-[70sch] text-center sm:text-left text-xl font-medium md:text-2xl lg:text-3xl'>
               <div>
-                <h1>Template dApp</h1>
+                <h1>Escape City</h1>
                 <p className='text-gray-400'>
-                  The{' '}
+                  Welcome to {' '}
                   <a
-                    href='https://www.npmjs.com/package/@multiversx/sdk-dapp'
+                    href='https://escape-city.vercel.app'
                     target='_blank'
                     className='text-gray-400 underline decoration-dotted hover:decoration-solid'
                   >
-                    sdk-dapp
+                    Escape City
                   </a>{' '}
-                  starter project for any dApp{' '}
-                  <br className='hidden xl:block' />
-                  built on the{' '}
+                  - The ultimate escape game built on the {' '}
                   <a
                     href='https://multiversx.com/'
                     target='_blank'
@@ -30,12 +28,20 @@ export const Home = () => {
                     MultiversX
                   </a>{' '}
                   blockchain.
+                  <br className='hidden xl:block' />
+                  Escape City offers an engaging and immersive experience where you can grow and evolve your runaways through exciting gameplay. Help your runaways escape!
                 </p>
               </div>
-              <Transaction />
+              <p className='text-blue-500'> Connect Wallet to start</p>
             </div>
           </div>
-          <div className='h-4/6 bg-mvx-white bg-contain bg-no-repeat w-1/2 bg-center' />
+          <div className='flex items-center justify-center h-4/6 w-1/2 bg-center'>
+            <img
+              src='https://res.cloudinary.com/dydj8hnhz/image/upload/v1717581659/y4r7yfifi3ejweqxnca9.svg' // Replace with your actual image URL
+              alt='Escape City'
+              className='max-h-full max-w-full object-contain'
+            />
+          </div>
         </div>
       </PageWrapper>
     </AuthRedirectWrapper>

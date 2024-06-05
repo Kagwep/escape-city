@@ -6,6 +6,7 @@ import { TypedValue } from '@multiversx/sdk-core/out';
 import { RunAwayType } from 'utils/EscapeCityTypes';
 import { EscapeCity } from './EscapeCity';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { AuthRedirectWrapper } from 'wrappers';
 
 interface PropTypes {}
 
@@ -88,6 +89,7 @@ export const RunAways: React.FC<PropTypes> = () => {
 
     return (
       <>
+      <AuthRedirectWrapper>
         <TransitionGroup>
           {selectedRunawayId !== null && !gameOver ? (
             <CSSTransition key="escapeCity" timeout={500} classNames="fade">
@@ -134,6 +136,7 @@ export const RunAways: React.FC<PropTypes> = () => {
             onCancel={handleModalCancel}
           />
         )}
+        </AuthRedirectWrapper>
       </>
     );
   };
