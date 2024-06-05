@@ -22,6 +22,7 @@ import { PageNotFound, Unlock } from 'pages';
 import { routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
 import { EscapeCity } from 'pages';
+import { RunAways } from 'pages';
 
 const AppContent = () => {
   return (
@@ -65,8 +66,7 @@ const AppContent = () => {
                 element={<route.component />}
               />
             ))}
-            <Route path="/play" element={<EscapeCity />}></Route>
-            <Route path="/runaways" element={<EscapeCity />}></Route>  
+            <Route path="/play" element={<RunAways />}></Route>
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Layout>

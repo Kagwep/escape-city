@@ -250,6 +250,99 @@
                     "multi_result": true
                 }
             ]
+        },
+        {
+            "name": "isUpForAuction",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "getAuctionStatus",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "Auction"
+                }
+            ]
+        },
+        {
+            "name": "getCurrentWinningBid",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "createSaleAuction",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                },
+                {
+                    "name": "starting_price",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "ending_price",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "duration",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "bid",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "EGLD"
+            ],
+            "inputs": [
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "endAuction",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "runaway_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": []
         }
     ],
     "events": [
@@ -335,6 +428,48 @@
     "esdtAttributes": [],
     "hasCallback": false,
     "types": {
+        "Auction": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "auction_type",
+                    "type": "AuctionType"
+                },
+                {
+                    "name": "starting_price",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "ending_price",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "deadline",
+                    "type": "u64"
+                },
+                {
+                    "name": "runaway_owner",
+                    "type": "Address"
+                },
+                {
+                    "name": "current_bid",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "current_winner",
+                    "type": "Address"
+                }
+            ]
+        },
+        "AuctionType": {
+            "type": "enum",
+            "variants": [
+                {
+                    "name": "Selling",
+                    "discriminant": 0
+                }
+            ]
+        },
         "RunAway": {
             "type": "struct",
             "fields": [

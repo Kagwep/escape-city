@@ -1,28 +1,30 @@
-import { NumericalType, NumericalValue, ResultsParser, U32Type } from "@multiversx/sdk-core/out";
+import { AddressValue, NumericalType, NumericalValue, ResultsParser, U32Type } from "@multiversx/sdk-core/out";
+import { useGetAccount } from "@multiversx/sdk-dapp/hooks/account/useGetAccount";
 import { useGetNetworkConfig } from "@multiversx/sdk-dapp/hooks/useGetNetworkConfig";
 import { ProxyNetworkProvider } from "@multiversx/sdk-network-providers/out";
-import { type } from "os";
 import { smartContract } from "utils/smartContract";
+import {Address} from 'utils/sdkDappCore'
 
 const resultsParser = new ResultsParser()
 
 
-const GET_RUNAWAY_BY_ID = 'getRunAwayById'
+const GET_TOKENS_OF_OWNER = 'tokensOfOwner'
 
-export const useGetRunAway = () => {
+export const useGetTokensOfOwner = () => {
 
+    const {address} = useGetAccount()
     const {network} = useGetNetworkConfig();
     
-    return async (id:number) => {
+    return async () => {
         try{
             const query = smartContract.createQuery({
-                func:GET_RUNAWAY_BY_ID,
-                args:[new NumericalValue(new U32Type, BigInt(id))]
+                func:GET_TOKENS_OF_OWNER,
+                args:[new AddressValue(new Address(address))]
             });
             const provider = new ProxyNetworkProvider(network.apiAddress);
             const queryResponse = await provider.queryContract(query);
     
-            const endpointDefination =  smartContract.getEndpoint(GET_RUNAWAY_BY_ID);
+            const endpointDefination =  smartContract.getEndpoint(GET_TOKENS_OF_OWNER);
     
             const {firstValue} = resultsParser.parseQueryResponse(
                 queryResponse,
@@ -31,12 +33,12 @@ export const useGetRunAway = () => {
 
             const data = firstValue?.valueOf();
     
-            console.log(firstValue?.valueOf())
+            console.log("from tokens of owner",firstValue?.valueOf())
             
             return data
     
         }catch(err){
-            console.log(`unable to call ${GET_RUNAWAY_BY_ID} `, err)
+            console.log(`unable to call ${GET_TOKENS_OF_OWNER} `, err)
         }
     }
 }

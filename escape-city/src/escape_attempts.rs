@@ -38,15 +38,16 @@ pub trait EscapeAttemps: storage::StorageModule {
 
         self.create_escape(points);
 
-        let mut new_weight = points / 10;
+        let weight_increment = points / 10;
 
         let mut  my_runaway = self.runaways(runaway_id).get();
 
         if my_runaway.experience % 100 == 0 {
-            new_weight += 10
+            my_runaway.weight += weight_increment + 100;
+        } else {
+            my_runaway.weight += weight_increment;
         }
 
-        my_runaway.weight = new_weight;
         my_runaway.experience = my_runaway.experience + 1;
 
         self.runaways(runaway_id).set(&my_runaway);

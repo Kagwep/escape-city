@@ -68,21 +68,15 @@ type KeyStatus = {
 
 enum State { START = 0, GAME = 1, LOSE = 2, CUTSCENE = 3 }
 
-export const EscapeCity = () => {
+interface EscapeCityProps {
+  runaway_id: number;  // ensure that runaway_id is expected to be a number
+  onSetDistanceCovered: (id: number) => void;
+}
+
+
+export const EscapeCity: React.FC<EscapeCityProps> = ({runaway_id,onSetDistanceCovered}) => {
   // get the room id from url
-  const { id } = useParams();
-//   const { rooms } = useContext(RoomContext);
-
-//   //get the single room based on id
-//   const room = rooms.find((item) => {
-//     if (id !== undefined) {
-//     return item.id === parseInt(id);
-//   }
-//   });
-
-
-
-  // destructure room
+   console.log("Runaway id",runaway_id)
 
   const createScene = async (canvas: HTMLCanvasElement | null): Promise<{ scene: Scene | undefined}> => {
 
@@ -300,6 +294,13 @@ export const EscapeCity = () => {
               gameUI.updateLifeBar(life);
               if (life <= 0  ){
                 characterController.setDead();
+                    // Convert meters to kilometers and round to the nearest integer
+                  let totalDistanceInKm = totalDistance / 1000;
+                  
+                  // Ensure that very small distances (less than 1 km but greater than 0) are treated fairly
+                  const roundedDistance = totalDistanceInKm < 1 && totalDistanceInKm > 0 ? 1 : Math.round(totalDistanceInKm);
+
+                onSetDistanceCovered(roundedDistance);
               }
               // Remove the projectile from the scene and the projectiles array
               projectiles = projectiles.filter(p => p !== projectile);
@@ -365,6 +366,15 @@ export const EscapeCity = () => {
 
               if (life <= 0  ){
                 characterController.setDead();
+
+                                  // Convert meters to kilometers and round to the nearest integer
+                  let totalDistanceInKm = totalDistance / 1000;
+                  
+                  // Ensure that very small distances (less than 1 km but greater than 0) are treated fairly
+                  const roundedDistance = totalDistanceInKm < 1 && totalDistanceInKm > 0 ? 1 : Math.round(totalDistanceInKm);
+
+                          
+                onSetDistanceCovered(roundedDistance);;
               }
           }
   
@@ -390,8 +400,16 @@ export const EscapeCity = () => {
   const initialEnemy = createEnemy(`enemy_${enemyCount}`, new Vector3(gameCenter.x + 12, gameCenter.y - 30, gameCenter.z + 15), scene);
   enemies.push({ enemy: initialEnemy, behavior: enemyBehaviors[Math.floor(Math.random() * enemyBehaviors.length)], speed: 0.1 + Math.random() * 0.1, lastShotTime: Date.now() });
   gameUI.updateEnemiesCount(enemyCount);
+
+  let lastPosition = characterController.player.position.clone();
+
+  let totalDistance = 0;
   
   scene.onBeforeRenderObservable.add(() => {
+
+    const currentPosition = characterController.player.position.clone(); 
+    let distanceMoved = Vector3.Distance(lastPosition, currentPosition);
+    distanceMoved = parseFloat(distanceMoved.toFixed(2));
       // Calculate elapsed time in seconds
       const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
       gameUI.updateElapsedTime(elapsedTime);
@@ -409,6 +427,16 @@ export const EscapeCity = () => {
           enemies.push({ enemy: newEnemy, behavior: randomBehavior, speed: randomSpeed, lastShotTime: Date.now() });
           gameUI.updateEnemiesCount(enemyCount); // Update the UI with the new enemy count
       }
+
+      if (distanceMoved > 0) { // Check if the player has actually moved
+        console.log(`Player moved ${distanceMoved} units`); // Use this distance for calculations
+
+        totalDistance +=distanceMoved;
+
+        lastPosition = currentPosition; // Update lastPosition to current position after processing
+
+        gameUI.updateDistance(parseFloat(totalDistance.toFixed(2)));
+    }
   });
   
   // Variable to keep track of the last elapsed time when an enemy was added
@@ -488,7 +516,7 @@ export const EscapeCity = () => {
   return (
       <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
         <canvas className="canvas" ref={canvasRef}></canvas>
-    </div>
+      </div>
 
   );
 };

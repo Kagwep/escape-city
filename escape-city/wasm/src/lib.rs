@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                           16
+// Endpoints:                           22
 // Async Callback (empty):               1
-// Total number of exported functions:  18
+// Total number of exported functions:  24
 
 #![no_std]
 
@@ -34,6 +34,12 @@ multiversx_sc_wasm_adapter::endpoints! {
         transfer => transfer
         transfer_from => transfer_from
         tokensOfOwner => tokens_of_owner
+        isUpForAuction => is_up_for_auction
+        getAuctionStatus => get_auction_status
+        getCurrentWinningBid => get_current_winning_bid
+        createSaleAuction => create_sale_auction
+        bid => bid
+        endAuction => end_auction
     )
 }
 

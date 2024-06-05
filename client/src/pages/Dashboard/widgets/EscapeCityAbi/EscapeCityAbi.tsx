@@ -9,6 +9,7 @@ import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { useGetNetworkConfig, useSendRunAway, useGetRunAway } from 'hooks';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
+import { run } from 'node:test';
 
 
 
@@ -22,11 +23,26 @@ export const EscapeCityAbi = ({ callbackRoute }: WidgetProps) => {
     if(window.confirm('Create Runaway')){
       await sendRunaway("The test runaway");
      }
-  
    }
+   const parseBytesToString = (bytes: any) => {
+    return String.fromCharCode(...bytes);
+  };
+  
+   const parseRunAway = (data: { fields: any[]; }) => {
+    const runAway = {
+      trail_print: Number(data.fields.find((f: { name: string; }) => f.name === "trail_print").value.value),
+      weight: Number(data.fields.find((f: { name: string; }) => f.name === "weight").value.value),
+      experience: Number(data.fields.find((f: { name: string; }) => f.name === "experience").value.value),
+      name: parseBytesToString(data.fields.find((f: { name: string; }) => f.name === "name").value.value.data)
+    };
+  
+    return runAway;
+  };
 
    const onGetRunAway = async () =>{
-      await getRunAway(1);
+     const runaway =  await getRunAway(1);
+     console.log(runaway.trail_print);
+
    }
 
   return (

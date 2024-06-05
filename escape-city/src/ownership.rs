@@ -111,7 +111,7 @@ pub trait RunAwayOwnership: storage::StorageModule + runaways_factory::RunAwayFa
         let mut runaway_list = ManagedVec::new();
         let mut list_len = 0; // more efficient than calling the API over and over
 
-        for runaway_id in 1..total_runaways {
+        for runaway_id in 1..=total_runaways {
             if nr_owned_runaway as usize == list_len {
                 break;
             }

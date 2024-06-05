@@ -1,6 +1,6 @@
 use crate::escape::Escape;
 use crate::runaways::RunAway;
-
+use crate::auction::Auction;
 
 multiversx_sc::imports!();
 
@@ -36,5 +36,8 @@ pub trait StorageModule {
 
     #[storage_mapper("approvedAddress")]
     fn approved_address(&self, runaway_id: usize) -> SingleValueMapper<ManagedAddress>;
+
+    #[storage_mapper("auction")]
+    fn auction(&self, runaway_id: usize) -> SingleValueMapper<Auction<Self::Api>>;
 
 }
