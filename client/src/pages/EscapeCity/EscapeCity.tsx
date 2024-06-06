@@ -136,14 +136,15 @@ export const EscapeCity: React.FC<EscapeCityProps> = ({runaway_id,onSetDistanceC
       };
       
       // Call the function
-      const {meshes} = await loadModels('escapecity.glb');
+      const {meshes: city} = await loadModels('escapecity.glb');
       //const {meshes:} = await loadModels('escapecity.glb');
 
-      meshes.forEach(mesh => {
+      city.forEach(mesh => {
         addPhysicsAggregate(mesh);
     });
 
-   
+
+     
 
       function loadAsset(
         rootUrl: string,
@@ -214,16 +215,17 @@ export const EscapeCity: React.FC<EscapeCityProps> = ({runaway_id,onSetDistanceC
  
         const ground = MeshBuilder.CreateGround(
           'ground',
-          { width: 500, height: 500 },
+          { width: 1000, height: 1000 },
           scene
       );
       const material = new StandardMaterial('material', scene);
-      material.diffuseColor = new Color3(0.5, 1, 0.5);
+      material.diffuseColor = new Color3(0.4, 0.26, 0.13);
       ground.material = material;
       ground.checkCollisions = true;
       ground.receiveShadows = true;
       ground.position.y = -0.03;
-      ground.position.z = 15;
+    
+   
       addPhysicsAggregate(ground);
 
       function addPhysicsAggregate(meshe: TransformNode) {
@@ -262,7 +264,15 @@ export const EscapeCity: React.FC<EscapeCityProps> = ({runaway_id,onSetDistanceC
       return enemy!;
   };
 
-  const hitSound = new Sound("hitSound", "/sounds/impact.mp3", scene);
+  const hitSound = new Sound('hit_sound',
+    'sounds/impact.mp3',
+    scene,
+    null,
+    {
+      loop: false,
+      playbackRate: 2.5,
+    });
+
   
   const createProjectile = (scene: Scene): Mesh => {
       const sphere = MeshBuilder.CreateSphere("projectile", { diameter: 0.2 }, scene);
@@ -289,7 +299,7 @@ export const EscapeCity: React.FC<EscapeCityProps> = ({runaway_id,onSetDistanceC
               // Reduce player's life
               life -= 0.05; // Adjust as needed
              
-                hitSound.play();
+              hitSound.play()
     
               gameUI.updateLifeBar(life);
               if (life <= 0  ){
@@ -300,15 +310,18 @@ export const EscapeCity: React.FC<EscapeCityProps> = ({runaway_id,onSetDistanceC
                   // Ensure that very small distances (less than 1 km but greater than 0) are treated fairly
                   const roundedDistance = totalDistanceInKm < 1 && totalDistanceInKm > 0 ? 1 : Math.round(totalDistanceInKm);
 
-                onSetDistanceCovered(roundedDistance);
+               // onSetDistanceCovered(roundedDistance);
               }
               // Remove the projectile from the scene and the projectiles array
               projectiles = projectiles.filter(p => p !== projectile);
               projectile.dispose();
               clearInterval(interval);
-          }else{}
-        
+          
+          }else{
             hitSound.stop();
+          }
+        
+            
         
       }, 16); // Update projectile position every 16ms (~60 FPS)
   
@@ -374,7 +387,7 @@ export const EscapeCity: React.FC<EscapeCityProps> = ({runaway_id,onSetDistanceC
                   const roundedDistance = totalDistanceInKm < 1 && totalDistanceInKm > 0 ? 1 : Math.round(totalDistanceInKm);
 
                           
-                onSetDistanceCovered(roundedDistance);;
+                //onSetDistanceCovered(roundedDistance);;
               }
           }
   
@@ -407,6 +420,8 @@ export const EscapeCity: React.FC<EscapeCityProps> = ({runaway_id,onSetDistanceC
   
   scene.onBeforeRenderObservable.add(() => {
 
+    
+
     const currentPosition = characterController.player.position.clone(); 
     let distanceMoved = Vector3.Distance(lastPosition, currentPosition);
     distanceMoved = parseFloat(distanceMoved.toFixed(2));
@@ -423,7 +438,7 @@ export const EscapeCity: React.FC<EscapeCityProps> = ({runaway_id,onSetDistanceC
           const newEnemyPosition = new Vector3(gameCenter.x + Math.random() * 20 - 10, gameCenter.y - 30, gameCenter.z + Math.random() * 20 - 10);
           const newEnemy = createEnemy(`enemy_${enemyCount}`, newEnemyPosition, scene);
           const randomBehavior = enemyBehaviors[Math.floor(Math.random() * enemyBehaviors.length)];
-          const randomSpeed = 0.1 + Math.random() * 0.1; // Speed between 0.1 and 0.2
+          const randomSpeed = 0.1 + Math.random() * 0.05; // Speed between 0.1 and 0.2
           enemies.push({ enemy: newEnemy, behavior: randomBehavior, speed: randomSpeed, lastShotTime: Date.now() });
           gameUI.updateEnemiesCount(enemyCount); // Update the UI with the new enemy count
       }

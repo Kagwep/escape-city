@@ -10,12 +10,12 @@ export const Home = () => {
             <div className='flex flex-col gap-2 max-w-[70sch] text-center sm:text-left text-xl font-medium md:text-2xl lg:text-3xl'>
               <div>
                 <h1 className='text-cyan-500'>Escape City</h1>
-                <p className='text-gray-400'>
+                <p className='text-blue-400'>
                   Welcome to {' '}
                   <a
                     href='https://escape-city.vercel.app'
                     target='_blank'
-                    className='text-gcyan-400 underline decoration-dotted hover:decoration-solid'
+                    className='text-cyan-400 underline decoration-dotted hover:decoration-solid'
                   >
                     Escape City
                   </a>{' '}

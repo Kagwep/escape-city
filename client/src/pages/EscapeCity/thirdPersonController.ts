@@ -21,6 +21,7 @@ export class ThirdPersonController {
     private deltaTime = '0';
     private wallkingSound!: BABYLON.Sound;
     private isDead: boolean = false;
+    private hitSound!: BABYLON.Sound;
 
     // 实时足部光线投射 状
     private footRaycast = new BABYLON.PhysicsRaycastResult();
@@ -212,6 +213,7 @@ export class ThirdPersonController {
             this.player.position.y - 1.8 < this.staircaseState.height &&
             this.iswsad
         ) {
+          
             this.velocity.y = 9.8;
         }
         if (
