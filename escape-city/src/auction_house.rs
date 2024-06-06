@@ -169,4 +169,5 @@ pub trait AuctionHouse: storage::StorageModule + ownership::RunAwayOwnership + r
             }
         } 
     }
+
 }

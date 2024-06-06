@@ -9,13 +9,13 @@ export const Home = () => {
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
             <div className='flex flex-col gap-2 max-w-[70sch] text-center sm:text-left text-xl font-medium md:text-2xl lg:text-3xl'>
               <div>
-                <h1>Escape City</h1>
+                <h1 className='text-cyan-500'>Escape City</h1>
                 <p className='text-gray-400'>
                   Welcome to {' '}
                   <a
                     href='https://escape-city.vercel.app'
                     target='_blank'
-                    className='text-gray-400 underline decoration-dotted hover:decoration-solid'
+                    className='text-gcyan-400 underline decoration-dotted hover:decoration-solid'
                   >
                     Escape City
                   </a>{' '}
@@ -23,7 +23,7 @@ export const Home = () => {
                   <a
                     href='https://multiversx.com/'
                     target='_blank'
-                    className='text-gray-400 underline decoration-dotted hover:decoration-solid'
+                    className='text-cyan-400 underline decoration-dotted hover:decoration-solid'
                   >
                     MultiversX
                   </a>{' '}
@@ -37,7 +37,7 @@ export const Home = () => {
           </div>
           <div className='flex items-center justify-center h-4/6 w-1/2 bg-center'>
             <img
-              src='https://res.cloudinary.com/dydj8hnhz/image/upload/v1717581659/y4r7yfifi3ejweqxnca9.svg' // Replace with your actual image URL
+              src='https://res.cloudinary.com/dydj8hnhz/image/upload/v1717672134/rgf3foxdxwdpoqxdwdyn.png' // Replace with your actual image URL
               alt='Escape City'
               className='max-h-full max-w-full object-contain'
             />

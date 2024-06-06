@@ -66,7 +66,6 @@ const AppContent = () => {
                 element={<route.component />}
               />
             ))}
-            <Route path="/play" element={<RunAways />}></Route>
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Layout>

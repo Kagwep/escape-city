@@ -57,9 +57,24 @@ export const Header = () => {
       </MxLink>
 
       <div className='px-5'>
-      <Link to="/play" className='px-2 text-cyan-400 hover:text-cyan-500'> Play </Link>
-      <Link to="/play" className='px-2 text-cyan-400 hover:text-cyan-500'> Runaways </Link>
-      <Link to="/marketplace" className='px-2 text-cyan-400 hover:text-cyan-500'> Marketplace </Link>
+      <MxLink
+        className='px-2 text-cyan-400 hover:text-cyan-500'
+        to={isLoggedIn ? RouteNamesEnum.play : RouteNamesEnum.home}
+      >
+       Play
+      </MxLink>
+      <MxLink
+        className='px-2 text-cyan-400 hover:text-cyan-500'
+        to={isLoggedIn ? RouteNamesEnum.runaways : RouteNamesEnum.home}
+      >
+       Runaways
+      </MxLink>
+      <MxLink
+        className='px-2 text-cyan-400 hover:text-cyan-500'
+        to={isLoggedIn ? RouteNamesEnum.profile : RouteNamesEnum.home}
+      >
+       Profile
+      </MxLink>
       </div>
 
       <nav className='h-full w-full text-sm sm:relative sm:left-auto sm:top-auto sm:flex sm:w-auto sm:flex-row sm:justify-end sm:bg-transparent'>
