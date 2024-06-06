@@ -310,7 +310,7 @@ export const EscapeCity: React.FC<EscapeCityProps> = ({runaway_id,onSetDistanceC
                   // Ensure that very small distances (less than 1 km but greater than 0) are treated fairly
                   const roundedDistance = totalDistanceInKm < 1 && totalDistanceInKm > 0 ? 1 : Math.round(totalDistanceInKm);
 
-               // onSetDistanceCovered(roundedDistance);
+                  onSetDistanceCovered(roundedDistance);
               }
               // Remove the projectile from the scene and the projectiles array
               projectiles = projectiles.filter(p => p !== projectile);
@@ -387,7 +387,7 @@ export const EscapeCity: React.FC<EscapeCityProps> = ({runaway_id,onSetDistanceC
                   const roundedDistance = totalDistanceInKm < 1 && totalDistanceInKm > 0 ? 1 : Math.round(totalDistanceInKm);
 
                           
-                //onSetDistanceCovered(roundedDistance);;
+                onSetDistanceCovered(roundedDistance);;
               }
           }
   
