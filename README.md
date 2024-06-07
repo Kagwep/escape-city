@@ -86,6 +86,7 @@ The frontend application is built using React and integrates seamlessly with the
 - **User Communication**: Enhance tools for players to coordinate multiplication requests.
 - **Expanded Auction System**: Introduce more robust features for auctions.
 - **Additional Gameplay Features**: Add new challenges and mechanics to keep the game engaging.
+- **Splitting Ownership and Auctioning**: Separate ownership and auctioning functionalities into individual smart contracts to improve modularity and maintainability.
 
 
 ## License
