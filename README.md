@@ -19,7 +19,7 @@ Escape City is a decentralized game built on the MultiversX blockchain, inspired
 
 ## Introduction
 
-Escape City offers a dynamic and interactive experience where players manage and evolve their runaways. By solving puzzles and completing challenges, players increase the weight of their runaways, allowing them to multiply. Additionally, players can list their runaways for auction and buy runaways from others.
+Escape City offers a dynamic and interactive experience where players manage and evolve their runaways. By completing challenges, players increase the weight of their runaways, allowing them to multiply. Additionally, players can list their runaways for auction and buy runaways from others.
 
 [Live Link to Play Escape City](https://escape-city.vercel.app/)
 

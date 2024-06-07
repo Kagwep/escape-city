@@ -1,7 +1,7 @@
 import React,{ useEffect, useState } from 'react';
 import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import { Modal, RunAwayItem } from "components/Views";
-import { useGetTokensOfOwner, useGetRunAway, useCreateEscapeAttemptFeedRunAway,useSendRunAway } from 'hooks';
+import { useGetTokensOfOwner, useGetRunAway, useCreateEscapeAttemptFeedRunAway,useSendRunAway, useGetAccountInfo } from 'hooks';
 import { TypedValue } from '@multiversx/sdk-core/out';
 import { RunAwayType } from 'utils/EscapeCityTypes';
 import { EscapeCity } from './EscapeCity';
@@ -10,6 +10,7 @@ import { AuthRedirectWrapper } from 'wrappers';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'components/Button';
+
 
 interface PropTypes {}
 
@@ -23,6 +24,7 @@ export const RunAways: React.FC<PropTypes> = () => {
   const [gameOver, setGameOver] = useState(false); 
   const [showModal, setShowModal] = useState(false);
   const [hasRunaways, setHasRunAways] = useState(false)
+  const { websocketEvent } = useGetAccountInfo()
 
   const getTokens = useGetTokensOfOwner();
   const getRunAway = useGetRunAway();
@@ -76,7 +78,7 @@ export const RunAways: React.FC<PropTypes> = () => {
 
     useEffect (() =>{
       fetchTokensOfOwner()
-    },[])
+    },[websocketEvent])
 
     const handleSelectRunaway = (id: number) => {
       setSelectedRunawayId(id);
