@@ -1,49 +1,41 @@
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
 import { Transaction } from './Transaction';
+import { useScrollToElement } from 'hooks';
+import { IconButton } from 'components/Views';
+import { NumberCard } from 'components/Views';
+import { BsFillRocketTakeoffFill } from 'react-icons/bs';
+import runaway from 'assets/img/runaway.png'
 
 export const Home = () => {
   return (
     <AuthRedirectWrapper requireAuth={false}>
-      <PageWrapper>
-        <div className='flex flex-col-reverse sm:flex-row items-center h-full w-full'>
-          <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
-            <div className='flex flex-col gap-2 max-w-[70sch] text-center sm:text-left text-xl font-medium md:text-2xl lg:text-3xl'>
-              <div>
-                <h1 className='text-cyan-500'>Escape City</h1>
-                <p className='text-blue-400'>
-                  Welcome to {' '}
-                  <a
-                    href='https://escape-city.vercel.app'
-                    target='_blank'
-                    className='text-cyan-400 underline decoration-dotted hover:decoration-solid'
-                  >
-                    Escape City
-                  </a>{' '}
-                  - The ultimate escape game built on the {' '}
-                  <a
-                    href='https://multiversx.com/'
-                    target='_blank'
-                    className='text-cyan-400 underline decoration-dotted hover:decoration-solid'
-                  >
-                    MultiversX
-                  </a>{' '}
-                  blockchain.
-                  <br className='hidden xl:block' />
-                  Escape City offers an engaging and immersive experience where you can grow and evolve your runaways through exciting gameplay. Help your runaways escape!
-                </p>
-              </div>
-              <p className='text-blue-500'> Connect Wallet to start</p>
+ 
+      <div className='flex flex-col gap-6 max-w-fit w-full'>
+
+      <section className='lg:flex lg:justify-between gap-12 p-7 lg:p-36 lg:px-20 bg-blue-950 w-full'>
+          <article className='lg:w-1/2 text-white'>
+            <h1 className='font-bold my-7 text-2xl lg:text-4xl leading-tight text-cyan-400'>Play & Collect NFTs</h1>
+            <p className='capitalize text-xl'>Collect, buy and sell Runaway tokens from more an engaging gameplay.</p>
+            <IconButton style="mx-auto bg-cyan-900" icon={<BsFillRocketTakeoffFill />} text="Get Started" />
+            <div className='lg:flex justify-between mt-10'>
+              <NumberCard number={''} text="Total Sale" />
+              <NumberCard number={''} text="Auctions" />
+
             </div>
-          </div>
-          <div className='flex items-center justify-center h-4/6 w-1/2 bg-center'>
-            <img
-              src='https://res.cloudinary.com/dydj8hnhz/image/upload/v1717672134/rgf3foxdxwdpoqxdwdyn.png' // Replace with your actual image URL
-              alt='Escape City'
-              className='max-h-full max-w-full object-contain'
-            />
-          </div>
-        </div>
-      </PageWrapper>
+          </article>
+          <article className='mx-auto w-96 rounded-2xl text-left bg-blue-900 overflow-hidden'>
+              <img className='w-96 rounded-2xl hover:cursor-pointer transition-transform duration-300 hover:scale-105' src={runaway} alt="AutumnMxse is an NFT artwork created by artist GxngYxng" loading="lazy" />
+                <h3 className='font-bold text-xl ml-3 mt-3 text-white'>Runaway</h3>
+                <div className='flex gap-2 ml-3 mb-3 pb-3 text-white'>
+                  <img className='w-5 rounded-full' src={runaway} alt="Artist GxngYxng's headshot" loading="lazy"/>
+                  <span>escapecity</span>
+                </div>
+          </article>
+        </section>
+
+        
+      </div>
+      
     </AuthRedirectWrapper>
   );
 };
