@@ -1,7 +1,7 @@
 
 # Escape City
 
-Escape City is a decentralized game built on the MultiversX blockchain, inspired by CryptoKitties but with a unique twist. Players grow and evolve their runaways through engaging and immersive escape gameplay.
+Escape City is a decentralized game built on the MultiversX blockchain. Players grow and evolve their runaways through engaging and immersive escape gameplay.
 
 ![Dashboad](https://res.cloudinary.com/dydj8hnhz/image/upload/v1717746227/bpgdwslzrs9cgs46idlb.png)
 
